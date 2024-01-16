@@ -1,3 +1,4 @@
+import 'package:checkout_app/Feathers/checkout/presentaion/views/payment_details.dart';
 import 'package:checkout_app/Feathers/checkout/presentaion/views/widgets/total_price.dart';
 import 'package:checkout_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MyCartBody extends StatelessWidget {
           const SizedBox(
             height: 18,
           ),
-          Image.asset('assets/images/product.png'),
+          Expanded(child: Image.asset('assets/images/product.png')),
           const SizedBox(
             height: 25,
           ),
@@ -45,8 +46,17 @@ class MyCartBody extends StatelessWidget {
             height: 16,
           ),
           CustomButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const PaymentDetails(),
+                ),
+              );
+            },
             text: 'Complete Payment ',
+          ),
+          const SizedBox(
+            height: 21,
           )
         ],
       ),

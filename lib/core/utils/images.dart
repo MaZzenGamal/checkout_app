@@ -1,0 +1,1 @@
+const done = 'assets/images/done.svg';

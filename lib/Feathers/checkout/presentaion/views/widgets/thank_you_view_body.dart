@@ -1,6 +1,9 @@
-import 'package:checkout_app/core/utils/images.dart';
+import 'package:checkout_app/Feathers/checkout/presentaion/views/widgets/thank_you_card.dart';
+import 'package:checkout_app/core/widgets/dashed_line.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
+import 'custom_check_icon.dart';
+import 'custom_circle_avatar.dart';
 
 class ThankYouViewBody extends StatelessWidget {
   const ThankYouViewBody({super.key});
@@ -10,68 +13,34 @@ class ThankYouViewBody extends StatelessWidget {
     return SafeArea(
         child: Stack(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 62),
-          child: Container(
-            decoration: BoxDecoration(
-                color: const Color(0xFFD9D9D9),
-                borderRadius: BorderRadius.circular(20)),
-          ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 62),
+          child: ThankYouCard(),
         ),
         Positioned(
           left: 2,
           bottom: MediaQuery.of(context).size.height * 0.3,
-          child: const CircleAvatar(
-            radius: 18,
-            backgroundColor: Colors.white,
+          child: const CustomCircleAvatar(),
+        ),
+        Positioned(
+          bottom: MediaQuery.of(context).size.height * 0.3 + 18,
+          left: 0,
+          right: 0,
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 45),
+            child: DashedLine(),
           ),
         ),
-         Positioned(
-           bottom: MediaQuery.of(context).size.height * 0.323,
-           left: 0,
-           right: 0,
-           child: Padding(
-             padding: const EdgeInsets.symmetric(horizontal: 45),
-             child: Row(
-              children:
-                List.generate(20, (index) => Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 2),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFB7B7B7),
-                        borderRadius: BorderRadius.circular(20)
-                      ),
-
-                      height: 2,
-                    ),
-                  ),
-                ))
-              ,
-                     ),
-           ),
-         ),
         Positioned(
           right: 2,
           bottom: MediaQuery.of(context).size.height * 0.3,
-          child: const CircleAvatar(
-            radius: 18,
-            backgroundColor: Colors.white,
-          ),
+          child: const CustomCircleAvatar(),
         ),
-        Positioned(
+        const Positioned(
           left: 0,
           right: 0,
           top: 15,
-          child:  CircleAvatar(
-            radius: 50,
-            backgroundColor: const Color(0xFFD9D9D9),
-            child:CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.green,
-              child: SvgPicture.asset(done),
-            ) ,
-          ),
+          child: CustomCheckIcon(),
         )
       ],
     ));

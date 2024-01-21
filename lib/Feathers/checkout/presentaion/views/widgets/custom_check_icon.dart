@@ -14,7 +14,7 @@ class CustomCheckIcon extends StatelessWidget {
       backgroundColor: const Color(0xFFD9D9D9),
       child: CircleAvatar(
         radius: 40,
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xFF34A853),
         child: SvgPicture.asset(done),
       ),
     );

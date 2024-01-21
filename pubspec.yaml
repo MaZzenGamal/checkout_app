@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.0.9
   google_fonts: ^6.1.0
   flutter_credit_card: ^4.0.1
+  flutter_stripe: ^10.0.0
 
 dev_dependencies:
   flutter_test:

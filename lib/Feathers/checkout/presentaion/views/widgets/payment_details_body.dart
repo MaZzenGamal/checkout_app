@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'custom_credit_card.dart';
 import 'payment_methode_list_view.dart';
-import 'thank_you_view.dart';
+import '../thank_you_view.dart';
 
 class PaymentDetailsBody extends StatefulWidget {
   const PaymentDetailsBody({super.key});

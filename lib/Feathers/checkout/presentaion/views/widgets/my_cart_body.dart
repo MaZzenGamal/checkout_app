@@ -1,9 +1,10 @@
-import 'package:checkout_app/Feathers/checkout/presentaion/views/payment_details.dart';
 import 'package:checkout_app/Feathers/checkout/presentaion/views/widgets/total_price.dart';
 import 'package:checkout_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
+import '../thank_you_view.dart';
 import 'order_info_item.dart';
+import 'payment_methode_list_view.dart';
 
 class MyCartBody extends StatelessWidget {
   const MyCartBody({super.key});
@@ -47,17 +48,55 @@ class MyCartBody extends StatelessWidget {
           ),
           CustomButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const PaymentDetails(),
-                ),
-              );
+              showModalBottomSheet(context: context, builder: (context){
+                return const PaymentMethodBottomSheet();
+              });
             },
             text: 'Complete Payment ',
           ),
           const SizedBox(
             height: 21,
           )
+        ],
+      ),
+    );
+  }
+}
+
+
+class PaymentMethodBottomSheet extends StatelessWidget {
+  const PaymentMethodBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const PaymentMethodsListView(),
+          const SizedBox(
+            height: 32,
+          ),
+          CustomButton(
+              text: 'Continue',
+              onPressed: () {
+                // if (formKey.currentState!.validate()) {
+                //   formKey.currentState!.save();
+                //   Navigator.of(context).push(
+                //     MaterialPageRoute(
+                //       builder: (context) => const ThankYouView(),
+                //     ),
+                //   );
+                // } else {
+                //   autoValidateMode = AutovalidateMode.always;
+                //   setState(() {});
+                // }
+                Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const ThankYouView(),
+                    ));
+              }),
         ],
       ),
     );

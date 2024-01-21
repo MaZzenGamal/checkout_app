@@ -2,8 +2,10 @@ import 'package:checkout_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-AppBar customAppBar({required final String title, void Function()? onTapBack}) {
+AppBar customAppBar({ final String? title, void Function()? onTapBack}) {
   return AppBar(
+
+    backgroundColor: Colors.transparent,
     centerTitle: true,
     leading: Center(
         child: GestureDetector(
@@ -13,7 +15,7 @@ AppBar customAppBar({required final String title, void Function()? onTapBack}) {
           ),
         )),
     title:  Text(
-      title,
+      title ?? '',
       textAlign: TextAlign.center,
       style: Styles.textStyle25,
     ),

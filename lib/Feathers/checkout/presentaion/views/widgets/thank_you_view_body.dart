@@ -10,39 +10,39 @@ class ThankYouViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Stack(
-      children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 62),
-          child: ThankYouCard(),
-        ),
-        Positioned(
-          left: 2,
-          bottom: MediaQuery.of(context).size.height * 0.3,
-          child: const CustomCircleAvatar(),
-        ),
-        Positioned(
-          bottom: MediaQuery.of(context).size.height * 0.3 + 18,
-          left: 0,
-          right: 0,
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 45),
-            child: DashedLine(),
-          ),
-        ),
-        Positioned(
-          right: 2,
-          bottom: MediaQuery.of(context).size.height * 0.3,
-          child: const CustomCircleAvatar(),
-        ),
-        const Positioned(
-          left: 0,
-          right: 0,
-          top: 15,
-          child: CustomCheckIcon(),
-        )
-      ],
-    ));
+    return Stack(
+      clipBehavior: Clip.none,
+          children: [
+    const Padding(
+      padding: EdgeInsets.only(right: 20,left: 20,bottom: 48,top: 24),
+      child: ThankYouCard(),
+    ),
+    Positioned(
+      left: 2,
+      bottom: MediaQuery.of(context).size.height * 0.26,
+      child: const CustomCircleAvatar(),
+    ),
+    Positioned(
+      bottom: MediaQuery.of(context).size.height * 0.26 + 18,
+      left: 0,
+      right: 0,
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 45),
+        child: DashedLine(),
+      ),
+    ),
+    Positioned(
+      right: 2,
+      bottom: MediaQuery.of(context).size.height * 0.26,
+      child: const CustomCircleAvatar(),
+    ),
+    const Positioned(
+      left: 0,
+      right: 0,
+      top: -25,
+      child: CustomCheckIcon(),
+    )
+          ],
+        );
   }
 }

@@ -1,11 +1,20 @@
 import 'package:checkout_app/Feathers/checkout/data/models/payment_intent_input_model.dart';
 import 'package:checkout_app/Feathers/checkout/data/models/payment_intent_model/Payment_intent_model.dart';
+import 'package:checkout_app/core/utils/api_keys.dart';
+import 'package:checkout_app/core/utils/api_service.dart';
 
-class StripeService
-{
+class StripeService {
+  final ApiService apiService = ApiService();
 
-  // PaymentIntentModel createPaymentIntent(PaymentIntentInputModel paymentIntentInputModel)
-  // {
-  //
-  // }
+  Future<PaymentIntentModel> createPaymentIntent(
+      PaymentIntentInputModel paymentIntentInputModel) async {
+    var response = await apiService.post(
+      url: 'https://api.stripe.com/v1/payment_intents',
+      body: paymentIntentInputModel.toJson(),
+      token: ApiKeys.secretKey,
+    );
+
+    var paymentIntentModel = PaymentIntentModel.fromJson(response.data);
+    return paymentIntentModel;
+  }
 }

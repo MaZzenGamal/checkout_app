@@ -26,4 +26,7 @@ class StripeService {
       merchantDisplayName: 'Mazen',
     ));
   }
+  Future displayPaymentSheet() async {
+    Stripe.instance.presentPaymentSheet();
+  }
 }

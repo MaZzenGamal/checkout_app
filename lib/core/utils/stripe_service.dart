@@ -1,4 +1,5 @@
 import 'package:checkout_app/Feathers/checkout/data/models/ephemeral_key_model/EphemeralKeyModel.dart';
+import 'package:checkout_app/Feathers/checkout/data/models/init_payment_sheet_input_model.dart';
 import 'package:checkout_app/Feathers/checkout/data/models/payment_intent_input_model.dart';
 import 'package:checkout_app/Feathers/checkout/data/models/payment_intent_model/Payment_intent_model.dart';
 import 'package:checkout_app/core/utils/api_keys.dart';
@@ -20,10 +21,13 @@ class StripeService {
     return paymentIntentModel;
   }
 
-  Future initPaymentSheet({required String paymentIntentClientSecret}) async {
+  Future initPaymentSheet(
+      {required InitPaymentSheetInputModel initPaymentSheetInputModel}) async {
     await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
-      paymentIntentClientSecret: paymentIntentClientSecret,
+      paymentIntentClientSecret: initPaymentSheetInputModel.clientSecret,
+      customerEphemeralKeySecret: initPaymentSheetInputModel.ephemeralKeySecret,
+      customerId: initPaymentSheetInputModel.customerId,
       merchantDisplayName: 'Mazen',
     ));
   }
@@ -35,8 +39,15 @@ class StripeService {
   Future makePayment(
       {required PaymentIntentInputModel paymentIntentInputModel}) async {
     var paymentIntentModel = await createPaymentIntent(paymentIntentInputModel);
+    var ephemeralKeyModel = await createEphemeralKey(
+        customerId: paymentIntentInputModel.customerId);
+    var initPaymentSheetInputModel = InitPaymentSheetInputModel(
+        clientSecret: paymentIntentModel.clientSecret!,
+        ephemeralKeySecret: ephemeralKeyModel.secret!,
+        customerId: paymentIntentInputModel.customerId);
     await initPaymentSheet(
-        paymentIntentClientSecret: paymentIntentModel.clientSecret!);
+      initPaymentSheetInputModel: initPaymentSheetInputModel,
+    );
     await displayPaymentSheet();
   }
 

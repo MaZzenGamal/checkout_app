@@ -1,3 +1,4 @@
+import 'package:checkout_app/Feathers/checkout/data/models/ephemeral_key_model/EphemeralKeyModel.dart';
 import 'package:checkout_app/Feathers/checkout/data/models/payment_intent_input_model.dart';
 import 'package:checkout_app/Feathers/checkout/data/models/payment_intent_model/Payment_intent_model.dart';
 import 'package:checkout_app/core/utils/api_keys.dart';
@@ -11,12 +12,10 @@ class StripeService {
   Future<PaymentIntentModel> createPaymentIntent(
       PaymentIntentInputModel paymentIntentInputModel) async {
     var response = await apiService.post(
-      url: 'https://api.stripe.com/v1/payment_intents',
-      body: paymentIntentInputModel.toJson(),
-      token: ApiKeys.secretKey,
-      contentType: Headers.formUrlEncodedContentType
-    );
-
+        url: 'https://api.stripe.com/v1/payment_intents',
+        body: paymentIntentInputModel.toJson(),
+        token: ApiKeys.secretKey,
+        contentType: Headers.formUrlEncodedContentType);
     var paymentIntentModel = PaymentIntentModel.fromJson(response.data);
     return paymentIntentModel;
   }
@@ -30,7 +29,7 @@ class StripeService {
   }
 
   Future displayPaymentSheet() async {
-   await Stripe.instance.presentPaymentSheet();
+    await Stripe.instance.presentPaymentSheet();
   }
 
   Future makePayment(
@@ -39,5 +38,20 @@ class StripeService {
     await initPaymentSheet(
         paymentIntentClientSecret: paymentIntentModel.clientSecret!);
     await displayPaymentSheet();
+  }
+
+  Future<EphemeralKeyModel> createEphemeralKey(
+      {required String customerId}) async {
+    var response = await apiService.post(
+        url: 'https://api.stripe.com/v1/ephemeral_keys',
+        body: {'customer': customerId},
+        token: ApiKeys.secretKey,
+        headers: {
+          'Authorization': 'Bearer ${ApiKeys.secretKey}',
+          'Stripe-Version': '2023-10-16'
+        },
+        contentType: Headers.formUrlEncodedContentType);
+    var ephemeralKeyModel = EphemeralKeyModel.fromJson(response.data);
+    return ephemeralKeyModel;
   }
 }

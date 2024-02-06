@@ -2,9 +2,9 @@ import 'Details.dart';
 
 class AmountModel {
   AmountModel({
-      this.total, 
-      this.currency, 
-      this.details,});
+      required this.total,
+      required this.currency,
+      required this.details,});
 
   AmountModel.fromJson(dynamic json) {
     total = json['total'];

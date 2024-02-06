@@ -1,11 +1,11 @@
-class Items {
-  Items({
+class OrderItemModel {
+  OrderItemModel({
       this.name, 
       this.quantity, 
       this.price, 
       this.currency,});
 
-  Items.fromJson(dynamic json) {
+  OrderItemModel.fromJson(dynamic json) {
     name = json['name'];
     quantity = json['quantity'];
     price = json['price'];
